@@ -7,16 +7,23 @@ symbol = 'BTCBUSD'
 url_full = url_base + f'?symbol={symbol}'
 
 while True:
-     response = requests.get(url_full)
-     response_json = response.json()
+     try:
+          response = requests.get(url_full)
+     except KeyboardInterrupt:
+          print('tirao abajo con c-c c:')
+          break
+     except:
+          print('binance exploded...')
+     else:
+          response_json = response.json()
 
-     simbolo = response_json['symbol']
-     precio = response_json['price']
-     hora = time()
-     cadena = f'{simbolo},{precio},{hora}\n'
+          simbolo = response_json['symbol']
+          precio = response_json['price']
+          hora = time()
+          cadena = f'{simbolo},{precio},{hora}\n'
 
-     with open('coins.txt', 'a') as coins:
-          coins.write(cadena)
-     #i += 1
+          with open('coins.txt', 'a') as coins:
+               coins.write(cadena)
+          #i += 1
 
 #ned
