@@ -1,1 +1,1 @@
-:$
+echo buy>satus

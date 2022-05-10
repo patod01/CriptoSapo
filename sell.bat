@@ -1,1 +1,1 @@
-:$
+echo sell>status
