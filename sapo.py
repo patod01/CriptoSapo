@@ -27,3 +27,10 @@ while True:
           #i += 1
 
 #ned
+# from urllib.request import urlopen
+# import json
+# from pprint import pprint
+
+# with urlopen(url_full) as response:
+#      body = response.read()
+#      # pprint(json.loads(body))
