@@ -1,1 +1,1 @@
-echo buy>satus
+echo buy>status
