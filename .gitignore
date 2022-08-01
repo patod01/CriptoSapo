@@ -1,7 +1,7 @@
-coins.txt
+*.csv
 penv.bat
 commit
 status
-inch.csv
-gold.csv
 t.*
+temp
+build

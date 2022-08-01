@@ -1,6 +1,7 @@
 from time import time
 from urllib.request import urlopen
 import json
+from sys import argv
 # from pprint import pprint
 
 
@@ -22,33 +23,50 @@ def infoBTC(api: str) -> (float, dict):
      return hora, json.loads(html_body)
 
 
-def pAPP(): ...
+def pAPP(mode: list) -> None:
+     ("Inicia la aplicacion segun el modo especificado."
+     " Para que registre la base de datos, el modo debe ser 'do it',"
+     " caso contrario, solo sapea.")
 
+     modo = " ".join(mode[1::])
 
-while ++i:
-     try:
-          # hora1 = time()
-          # with urlopen(url_full) as response:
-          #      hora2 = time()
-          #      body = response.read()
-          hora: float
-          btc_info: dict
-          hora, btc_info = infoBTC(url_full)
+     hora: float
+     btc_info: dict
+     simbolo: str
+     precio: str
+     cadena: str
 
-     except KeyboardInterrupt:
-          print('tirao abajo con c-c c:')
-          break
-     except:
-          print('binance exploded...')
+     if modo == 'do it':
+          while ++i:
+               try:
+                    hora, btc_info = infoBTC(url_full)
+               except KeyboardInterrupt:
+                    print('tirao abajo con c-c c:')
+                    break
+               except:
+                    print('binance exploded...')
+                    break
+               else:
+                    simbolo = btc_info['symbol']
+                    precio = btc_info['price']
+                    cadena = f'{simbolo},{precio},{hora}\n'
+
+                    with open('db/coins.csv', 'a') as coins:
+                         coins.write(cadena)
+     elif modo == 'just the price':
+          try:
+               btc_price: str = infoBTC(url_full)[1]['price']
+               print(btc_price)
+          except:
+               print('binance exploded...')
+          ...
      else:
-          # hora = hora1 + (hora2 - hora1)/2
-          # btc_info = json.loads(body)
+          ...
+          print('lel')
+     return None
 
-          simbolo: str = btc_info['symbol']
-          precio: str = btc_info['price']
-          cadena: str = f'{simbolo},{precio},{hora}\n'
 
-          with open('coins.txt', 'a') as coins:
-               coins.write(cadena)
+if __name__ == '__main__':
+     pAPP(argv)
 
 #ned
