@@ -1,8 +1,6 @@
 from time import time
 from urllib.request import urlopen
 import json
-from sys import argv
-# from pprint import pprint
 
 
 coin_index = {
@@ -59,15 +57,18 @@ def pAPP() -> None:
      indice: int
      precio: str
      cadena: str
+     coinsCSV = '../db/coins.csv'
+
+     print('Proceso iniciado. Para salir, presionar ctrl+c...')
 
      while ++i:
           try:
                coin_price, hora = coin_info()
           except KeyboardInterrupt:
-               print('tirao abajo con c-c c:')
+               print('Tirao abajo con c-c c:')
                break
           except:
-               print('binance exploded...')
+               print('Binance exploded...')
                break
           else:
                indice = coin_index[coin_price['symbol'].removesuffix('USDT')]
@@ -75,12 +76,8 @@ def pAPP() -> None:
                cadena = f'{indice},{precio},{hora}\n'
 
                # tratar de llevar este bloque justo despues del while
-               with open('db/coins.csv', 'a') as coins:
+               with open(coinsCSV, 'a') as coins:
                     coins.write(cadena)
      return None
-
-
-if __name__ == '__main__':
-     pAPP()
 
 #ned

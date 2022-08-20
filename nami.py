@@ -12,18 +12,18 @@ def stealable(wallet_url: str) -> bool:
           print('berries!!')
           return True
      else:
-          if input('wallet not found. Wanna create ona? (y/n) ').lower() == 'y':
+          if input('Wallet not found. Wanna create ona? (y/n) ').lower() == 'y':
                try:
                     wallet = open(wallet_url, 'w')
                except Exception as e:
-                    print('cannot create file')
+                    print('Cannot create file')
                     raise e
                else:
-                    input_saldo = input('cuanto dinero en USD deseas colocar? (default: 1000)>')
+                    input_saldo = input('Cuanto dinero en USD deseas colocar? (default: 1000)>')
                     try:
                          input_saldo = int(input_saldo)
                     except ValueError:
-                         print('bad input, added 1000 USDT')
+                         print('Bad input, added 1000 USDT')
                          input_saldo = 1000
                     pocket_template = {
                          "coin": {'USDT': input_saldo},
@@ -42,7 +42,7 @@ def stealable(wallet_url: str) -> bool:
 
 
 def sacar_berrys(wallet_url: str) -> dict:
-     ("carga los TODOS datos de la billetara en memoria")
+     ("Carga los TODOS datos de la billetara en memoria.")
      wallet = open(wallet_url, 'r')
      pocket = json.load(wallet)
      wallet.close()
@@ -50,7 +50,7 @@ def sacar_berrys(wallet_url: str) -> dict:
 
 
 def guardar_berrys(pocket: str, wallet_url: str) -> None:
-     ("guarda los datos en la billetera")
+     ("Guarda los datos en la billetera.")
      with open(wallet_url, 'w') as wallet:
           json.dump(pocket, wallet)
      del pocket, wallet
@@ -58,11 +58,11 @@ def guardar_berrys(pocket: str, wallet_url: str) -> None:
 
 
 def update_coins(log: dict, pocket: dict):
-     return
+     ...
 
 
 def nami(modo: str) -> None:
-     WALLLET = 'action/chauchero'
+     WALLLET = '../db/chauchero'
 
      # verifica si existe la billetera
      if not stealable(WALLLET): return None
@@ -78,14 +78,18 @@ def nami(modo: str) -> None:
      if modo == 'buy':
           coin_b, coin_s = 'BTC', 'USDT'
           if bolsillo['coin'][coin_s] == 0:
-               print(f"tienes {bolsillo['coin'][coin_s]} {coin_s}, no puedes comprar!")
+               print(f"Tienes {bolsillo['coin'][coin_s]} {coin_s}, no puedes comprar!")
                return None
           amount_of_coins_traded: float = bolsillo['coin'][coin_s]/coin_price
      elif modo == 'sell':
-          coin_b, coin_s = 'USDT', 'BTC' 
-          if bolsillo['coin'][coin_s] == 0:
-               print(f"tienes {bolsillo['coin'][coin_s]} {coin_s}, no puedes vender!")
+          coin_b, coin_s = 'USDT', 'BTC'
+          if bolsillo['coin'].get(coin_s, 'no coins') == 'no coins':
+               print(f'No tienes esta moneda registrada ({coin_s})')
                return None
+          else:
+               if bolsillo['coin'][coin_s] == 0:
+                    print(f"Tienes {bolsillo['coin'][coin_s]} {coin_s}, no puedes vender!")
+                    return None
           amount_of_coins_traded: float = bolsillo['coin'][coin_s]*coin_price
      elif modo == 'deposit':
           NotImplemented
@@ -102,8 +106,6 @@ def nami(modo: str) -> None:
           "unit": 'USDT/BTC',
      }
 
-     print(type(coin_price))
-
      bolsillo['coin'][coin_b] = amount_of_coins_traded
      bolsillo['coin'][coin_s] = 0
      bolsillo['historial'].append(new_trade)
@@ -111,13 +113,8 @@ def nami(modo: str) -> None:
      # salva el nuevo contenido en la cartera
      guardar_berrys(bolsillo, WALLLET)
 
-     del bolsillo
+     del bolsillo, new_trade
 
      return None
-
-
-if __name__ == '__main__':
-     nami()
-     ...
 
 #ned

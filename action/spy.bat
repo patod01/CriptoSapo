@@ -1,9 +1,9 @@
 @echo off
+setlocal
 echo - server turned ON -
-call C:\Users\larry\Desktop\fx\cp310\python.exe ..\sapo.py
 
-:: recordar cambiar esta ruta para la build
-rem call C:\Users\larry\Desktop\fx\cp310\python.exe ..\sapo.py do it
+set ruta=C:\Users\larry\Desktop\fx\cp310\python.exe
+call %ruta% ..\luffy.py spy
 
 echo - server turned OFF -
-pause
+pause>nul

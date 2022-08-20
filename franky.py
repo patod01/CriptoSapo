@@ -1,14 +1,27 @@
+import os.path as ruta
 import csv
 from time import localtime, strftime
-#from pprint import pprint
 
 
-def make_format_time(unformated_time: str) -> str:
+def make_format_time(unformated_time: str, seconds=None) -> str:
+     ("Recibe una cadena de un numero decimal que represente una"
+     " fecha segun la libreria estandar de C y le da un formato"
+     " legible.")
      formated_time = strftime(
           '%F %R',
           localtime(float(unformated_time))
      )
      return formated_time
+
+
+def database_verification(database_url: str) -> bool:
+     ("Confirma si existe una base de datos.")
+     if ruta.isfile(database_url):
+          print('Materials!!')
+          return True
+     else:
+          print(f'Materials not found in {database_url} D\':')
+     return False
 
 
 def franky() -> None:
@@ -30,6 +43,7 @@ def franky() -> None:
           return
 
 
+     # Price attributes
      precio = {
           'open':  None,
           'high':  None,
@@ -40,9 +54,15 @@ def franky() -> None:
      minuto_anterior = ''
      minuto_actual = ''
 
-     # coins -> gold
-     db_coins = open('db/coins.csv')
-     db_gold = open('db/gold.csv', 'w', newline='')
+     # Databases: coins -> gold
+     coinsCSV = '../db/coins.csv'
+     goldCSV = '../db/gold.csv'
+
+     if database_verification(coinsCSV):
+          db_coins = open(coinsCSV)
+     else:
+          return None
+     db_gold = open(goldCSV, 'w', newline='')
 
      lente = csv.reader(db_coins)
      pluma = csv.writer(db_gold)
@@ -57,7 +77,7 @@ def franky() -> None:
                linea = next(lente)
                if len(linea) < 3: continue # jumps empty lines
           except StopIteration:
-               print('end of file reached')
+               print('End of file reached')
                break
           else:
                minuto_actual = make_format_time(linea[2]) # log time
@@ -83,12 +103,8 @@ def franky() -> None:
      db_coins.close()
      db_gold.close()
 
-     print('files closed and convertion finished')
+     print('Files closed and convertion finished')
 
      return
-
-
-if __name__ == '__main__':
-     franky()
 
 #ned
