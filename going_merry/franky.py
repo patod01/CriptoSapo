@@ -3,12 +3,16 @@ import csv
 from time import localtime, strftime
 
 
-def make_format_time(unformated_time: str, seconds=None) -> str:
+def make_format_time(unformated_time: str, *, seconds=False) -> str:
      ("Recibe una cadena de un numero decimal que represente una"
      " fecha segun la libreria estandar de C y le da un formato"
      " legible.")
+     if seconds:
+          formato_de_hora = '%Y-%m-%d %H:%M:%S'
+     else:
+          formato_de_hora = '%Y-%m-%d %H:%M'
      formated_time = strftime(
-          '%F %R',
+          formato_de_hora,
           localtime(float(unformated_time))
      )
      return formated_time
@@ -24,7 +28,7 @@ def database_verification(database_url: str) -> bool:
      return False
 
 
-def franky() -> None:
+def build_blueprint() -> None:
      ("Utilidad para transformar csv obtenido de binance a un CSV"
      " ordenado que pueda leerse.")
 
@@ -40,7 +44,7 @@ def franky() -> None:
                precio['close'],
           ]
           pluma.writerow(registro)
-          return
+          return None
 
 
      # Price attributes
@@ -105,6 +109,6 @@ def franky() -> None:
 
      print('Files closed and convertion finished')
 
-     return
+     return None
 
 #ned

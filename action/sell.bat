@@ -1,5 +1,6 @@
 @echo off
 setlocal
+:: path to python.exe
 set ruta=C:\Users\larry\Desktop\fx\cp310\python.exe
-call %ruta% ..\luffy.py sell
+call %ruta% ..\going_merry\luffy.py sell
 pause>nul

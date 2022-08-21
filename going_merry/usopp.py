@@ -43,11 +43,11 @@ def coin_info() -> (float, dict):
           hora_f_request: float = time()
           html_body: bytes = response.read()
      hora = hora_i_request + (hora_f_request - hora_i_request)/2
-     
+
      return json.loads(html_body), hora
 
 
-def pAPP() -> None:
+def spy() -> None:
      ("Llama a la api de binance y registra el simbolo, precio y hora"
      " de la llamada en un csv.")
 

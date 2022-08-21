@@ -1,5 +1,5 @@
 from nami import nami
-import sapo, franky
+import usopp, franky
 from sys import argv
 
 
@@ -7,9 +7,9 @@ match haz_esto := argv[1]:
      case "buy" | "sell":
           nami(haz_esto)
      case "spy":
-          sapo.pAPP()
+          usopp.spy()
      case "ship":
-          franky.franky()
+          franky.build_blueprint()
      case _:
           print(f'WTF are you saying... {haz_esto}??')
 

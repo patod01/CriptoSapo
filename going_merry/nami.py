@@ -1,7 +1,7 @@
 import os.path as ruta
 import json
 from time import time
-import sapo, franky
+import usopp, franky
 
 
 def stealable(wallet_url: str) -> bool:
@@ -22,13 +22,14 @@ def stealable(wallet_url: str) -> bool:
                     input_saldo = input('Cuanto dinero en USD deseas colocar? (default: 1000)>')
                     try:
                          input_saldo = int(input_saldo)
+                         if input_saldo <= 0: raise ValueError
                     except ValueError:
                          print('Bad input, added 1000 USDT')
                          input_saldo = 1000
                     pocket_template = {
                          "coin": {'USDT': input_saldo},
                          "historial": [{
-                              "date": franky.make_format_time(time()), # meterle segundos
+                              "date": franky.make_format_time(time(), seconds=True),
                               "type": 'deposit',
                               "amount": input_saldo,
                               "unit price": 1,
@@ -38,6 +39,8 @@ def stealable(wallet_url: str) -> bool:
                     json.dump(pocket_template, wallet)
                     wallet.close()
                     del pocket_template, wallet
+          else:
+               print('Nothing done')
      return False
 
 
@@ -71,10 +74,11 @@ def nami(modo: str) -> None:
      bolsillo: dict = sacar_berrys(WALLLET)
 
      # compra o venta referenciado al usdt
-     coin_price, hora = sapo.coin_info()
+     coin_price, hora = usopp.coin_info()
      coin_price = float(coin_price['price'])
-     hora: str = franky.make_format_time(hora)
+     hora: str = franky.make_format_time(hora, seconds=True)
 
+     # mover algun dia a su propia funcion
      if modo == 'buy':
           coin_b, coin_s = 'BTC', 'USDT'
           if bolsillo['coin'][coin_s] == 0:
