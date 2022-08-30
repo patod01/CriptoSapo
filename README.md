@@ -14,7 +14,7 @@ salven el pellejo.
 - construir el mismo formato de grafico de velas usado en trading
 - simular compra y venta en vivo de tokens con paridad al USDT
 
-Requisitos para version 1:
+### Requisitos para version 1:
 - funcionalidad descrita en "Funcion" completa
 - interfaz grafica para
 	- capturar datos
