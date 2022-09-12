@@ -2,34 +2,17 @@ import os
 from sys import exit as build_notification, argv
 import json
 import time
-# from os import getcwd, listdir, chdir, walk
-# from os import mkdir, rename, unlink, rmdir
-# from os.path import exists
+from zipfile import ZipFile as zfile, ZIP_DEFLATED
 
 
 def del_build_content() -> None:
-     # def content_of(folder: str) -> bool:
-     #      ("Verifica si la ruta se encuentra listada en la definicion de"
-     #      " esta funcion")
-     #      forbiden_list = [     
-     #           '.\\tools\\conf',
-     #           '.\\tools\\conf\\pydist',
-     #      ]
-     #      for forbiden_folder in forbiden_list:
-     #           if (folder + '\\').startswith(forbiden_folder + '\\'):
-     #                return False
-     #      return True
-
+     ("Recorre toda la carpeta 'build' para eliminar su contenido.")
      build_folder_tree = list(os.walk('.\\build'))[::-1]
      for path, folders, files in build_folder_tree:
           for file in files:
-               # is_removable = content_of(path)
-               # if not is_removable: continue
                print(path + '\\' + file)
                os.unlink(path + '\\' + file)
           for folder in folders:
-               # is_removable = content_of(path + '\\' + folder)
-               # if not is_removable: continue
                print(path + '\\' + folder)
                os.rmdir(path + '\\' + folder)
      return None
@@ -45,21 +28,23 @@ def check_build_folder(project_name: str) -> bool:
                if not 'build' in os.listdir():
                     os.mkdir('build')
                     ITER_AGAIN = True
-               # if not 'conf' in os.listdir('tools'):
-               #      os.mkdir('tools\\conf')
-                    ITER_AGAIN = True
                if not 'pydist' in os.listdir('tools'):
                     os.mkdir('tools\\pydist')
                     ITER_AGAIN = True
-               if not 'legos.txt' in os.listdir('tools'):
+               if not 'bdmn.txt' in os.listdir('tools'):
                     legos = {
                          "app name": '',
                          "app version": '0',
+                         "beta version": '1',
+                         "build date": '0',
+                         "build number": '0',
+                         "build version": '0',
                          "changelog file": '',
                          "commit file": '',
+                         "license": '',
                          "python version": '',
                     }
-                    with open('tools\\legos.txt', 'x') as info_file:
+                    with open('tools\\bdmn.txt', 'x') as info_file:
                          json.dump(legos, info_file, indent=2)
                     ITER_AGAIN = True
           except Exception as e:
@@ -74,15 +59,43 @@ def check_build_folder(project_name: str) -> bool:
 
 
 def check_app_info() -> bool:
-     if os.path.isfile('tools\\legos.txt'):
-          with open('tools\\legos.txt') as info_file:
+     if os.path.isfile('tools\\bdmn.txt'):
+          with open('tools\\bdmn.txt') as info_file:
                legos: dict = json.load(info_file)
+     else:
+          return False
 
+     print()
      for info in legos:
           print(info + ': ' + legos[info])
           if legos[info] == '':
                print('No puede haber campos vacios.')
                return False
+     print()
+
+     if legos['app version'].isnumeric():
+          if int(legos['build number']) < 0:
+               print('Major version must be a possitive integer')
+               return False
+     else:
+          print('Build number must be a possitive integer')
+          return False
+
+     if legos['beta version'].isnumeric():
+          if not int(legos['beta version']) in (0, 1):
+               print('Beta version must be a 0 or 1')
+               return False               
+     else:
+          print('Beta version must be 0 or 1')
+          return False
+
+     if legos['build number'].isnumeric():
+          if int(legos['build number']) < 0:
+               print('Build number must be a possitive integer')
+               return False
+     else:
+          print('Build number must be a possitive integer')
+          return False
 
      if not os.path.isfile(legos['changelog file']):
           print('No se puede encontrar changelog file.')
@@ -106,25 +119,7 @@ def check_app_info() -> bool:
      return True
 
 
-def can_copy() -> bool: return True
-
-
-def version() -> str:
-     build_number: str
-     if os.path.isfile('tools\\legos.txt'):
-          with open('tools\\legos.txt') as info_file:
-               legos: dict = json.load(info_file)
-               if legos['app version'].isnumeric():
-                    if int(legos['app version']) == 0:
-                         print('yes')
-                         print(time.strftime('%Y-%m-%d %H:%M', time.localtime()))
-               else: # parser
-                    print(time.strftime('%Y-%m-%d %H:%M', time.localtime()))
-
-     return None
-
-
-def numbers_eater(x: str, base_a: int, base_b: int) -> str:
+def klaus_fangs(x: str, base_a: int, base_b: int) -> str:
      ("Convierte un numero 'x' en base 'a' al equivalente en base"
      " 'b'. 'x' debe ser un entero positivo y las bases van desde"
      " base 2 hasta base 62 inclusive.")
@@ -164,20 +159,132 @@ def numbers_eater(x: str, base_a: int, base_b: int) -> str:
      return X[::-1]
 
 
-def update_change_log(): ...
-def compile_project(): ...
-def pack_it(): ...
+def version_it() -> str:
+     ("Updates build number and its date inside app's information file.")
+     legos: dict
+     fecha: [str, str]
+     build_number: str
+     version_code: str
+     with open('tools\\bdmn.txt') as info_file:
+          legos = json.load(info_file)
+          new_build_date: str = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
+          fecha = time.strftime('%y.%j', time.localtime()).split('.')
+          build_number = str(int(legos['build number']) + 1)
+          version_code = klaus_fangs(fecha[0], 10, 62) \
+                       + klaus_fangs(fecha[1], 10, 62) \
+                       + klaus_fangs(build_number, 10, 62)
+     with open('tools\\bdmn.txt', 'w') as info_file:
+          legos['build date'] = new_build_date
+          legos['build number'] = build_number
+          legos['build version'] = legos['app version'] + '.' + version_code
+          print(json.dumps(legos, indent=2))
+          json.dump(legos, info_file, indent=2)
+     return legos['build version']
+
+
+def update_changelog() -> None:
+     ("Writes on a changelog file defined in the app information file"
+     " the content of the commit file, adding the date and build numbers."
+     " It only do the writing if the build is not a beta version.")
+     with open('tools\\bdmn.txt') as info_file:
+          legos: dict = json.load(info_file)
+          if int(legos['beta version']): return None
+          # retrieving information
+          with open(legos['commit file']) as commit_file:
+               commit_content = commit_file.readlines()
+               commit_header = '# ' + commit_content.pop(0)
+               commit_content = ''.join(commit_content)
+          with open(legos['changelog file']) as changelog_file:
+               changelog_content = changelog_file.read()
+          # merging and updating information into changelog
+          with open(legos['changelog file'], 'w') as changelog_file:
+               new_changelog_content = commit_header          \
+                                     + '\n`build date: '      \
+                                     + legos['build date']    \
+                                     + '`\n`build version: '  \
+                                     + legos['build version'] \
+                                     + '`\n'                  \
+                                     + commit_content         \
+                                     + '\n---\n\n'            \
+                                     + changelog_content
+               changelog_file.write(new_changelog_content)
+     return None
+
+
+def copy_sources() -> bool:
+     ("Copy the specified source files in 'src.txt' to the build folder.")
+
+     if not os.path.isfile('tools/src.txt'):
+          print('Sin archivo \'src.txt\'')
+          return False
+
+     with open('tools/src.txt') as sources:
+          source_files = sources.readlines()
+
+     with open('tools/_src.txt', 'w') as xcopy:
+          for file in source_files:
+               file = file[:-1:]
+               destination = file.split('\\')
+               destination.pop()
+               if destination and destination[0] == 'app':
+                    destination.pop(0)
+               if destination and destination[0] == 'tools':
+                    destination.pop(0)
+               command = 'xcopy ' + file + ' build\\' + '\\'.join(destination) + '\n'
+               xcopy.write(command)
+
+               # crea las carpetas paa que xcopy no se maree
+               last_folder = 'build'
+               for folder in destination:
+                    if not os.path.isdir(last_folder + '/' + folder):
+                         os.mkdir(last_folder + '/' + folder)
+                    last_folder += '/' + folder
+
+     return True
+
+
+def compile_project() -> None:
+     ("Compile .py files to .pyc files.")
+     pass
+
+
+def pack_it() -> None:
+     ("Packs build folder into a zip file.")
+
+     with open('tools\\bdmn.txt') as info_file:
+          legos: dict = json.load(info_file)
+
+     os.chdir('build')
+     source_files = list(os.walk('.'))
+     app_name: str = f"criptosapo-{'-'.join(legos['build version'].split('.'))}.zip"
+
+     with zfile(
+          app_name,
+          mode = 'w',
+          compression = ZIP_DEFLATED,
+          compresslevel = 9
+     ) as app:
+          for path, folders, files in source_files:
+               for folder in folders:
+                    print(path + '\\' + folder)
+                    app.write(path + '\\' + folder)
+               for file in files:
+                    print(path + '\\' + file)
+                    app.write(path + '\\' + file)
+
+     os.chdir('..')
+
+     return None
 
 
 def build() -> None:
      PROJECT_NAME = 'CriptoSapo'
-     INSTRUCTION = argv[-1::][0] if len(argv) > 1 else None
-     NOT_READY = 0
-     COPY = 69
+     INSTRUCTION: str = argv[-1::][0] if len(argv) > 1 else ''
+     NOT_READY, UPDATE, COPY, BUILD = 1, 4, 33, 69
 
      match INSTRUCTION:
           case 'setup':
-               print('Setting up...') # checking files
+               print('Checking files and setting up...')
                del_build_content()
                FOLDER_READY = check_build_folder(PROJECT_NAME)
                if not FOLDER_READY:
@@ -185,12 +292,19 @@ def build() -> None:
                          'Build folder initialized.'
                          ' Update your config file.'
                     )
-               if not check_app_info(): build_notification(NOT_READY)
-               if can_copy(): build_notification(COPY)
+               if not check_app_info():
+                    build_notification(NOT_READY)
+               build_notification(UPDATE)
+          case 'update':
+               BUILD_VERSION: str = version_it()
+               print('VASDFasdfbaksfbkasef:', BUILD_VERSION)
+               update_changelog()
+               build_notification(COPY)
+          case 'copy':
+               if copy_sources(): # done in batch for now
+                    build_notification(BUILD)
           case 'build':
-               print('Building...') # after copy
-               BUILD_NUMBER: str = version()
-               update_change_log()
+               print('Building...')
                compile_project()
                pack_it()
      return None

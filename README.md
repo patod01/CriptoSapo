@@ -26,8 +26,5 @@ salven el pellejo.
 ---
 
 ### WIP:
-- versioning system
-	- add changelog when this happens
-		- group every commit since the first day
-- dev tools for building versions
+- GUI
 - standalonizing the app

@@ -1,0 +1,12 @@
+{
+  "app name": "CriptoSapo",
+  "app version": "0",
+  "beta version": "0",
+  "build date": "2022-09-12 00:48:01",
+  "build number": "3",
+  "build version": "0.m473",
+  "changelog file": "changelog.md",
+  "commit file": "commit",
+  "license": "WTFPL v2",
+  "python version": "3.10"
+}

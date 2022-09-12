@@ -5,5 +5,4 @@ temp
 build
 chauchero
 _*
-pydist
-bman.txt
+tools/pydist/*
