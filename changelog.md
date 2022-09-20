@@ -24,7 +24,6 @@
 - removed commented import lines in `build.py`
 - readme updated
 - changed `b.bat` to `build.bat`
-
 - I screw it up. It'll not be 11 but 2 weeks instead v:
 - __first public release with a tag!!__ _When I find out how to upload it..._
 
