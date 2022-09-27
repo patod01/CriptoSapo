@@ -21,6 +21,7 @@ salven el pellejo.
 	- transformar / exportar datos
 	- simular compra
 	- simular venta
+- grafico para completar proceso ETL (queryem) 
 - standalone
 
 ---

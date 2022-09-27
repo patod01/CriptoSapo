@@ -33,15 +33,15 @@
 
 date: 2022-08-30 00:07:52
 
-- added app info file
+- added app info file \
 .- make build tools
     - erase last build content
-    - check if build folder set up
-    .- copy new project content
+    - check if build folder set up \
+    .- copy new project content \
     .- versioning system
-        - number base convertor
-    .- update changelog
-    .- make zip distribution
+        - number base convertor \
+    .- update changelog \
+    .- make zip distribution \
 .- make changelog file
 - updated format issue in readme
 - pydist and bman ignored
