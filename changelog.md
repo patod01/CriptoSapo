@@ -1,3 +1,33 @@
+# Standalone is here!!
+
+`build date: 2022-09-30 17:10:57`
+`build version: 0.m4p4`
+
+- trying to remove glitch from changelog. Let's see next push...
+- working with branches from now on.
+- ignored build zip files.
+- fixed changelog markdown breakline.
+- `init.bat` updated to evaluate env vars which add the current python dist to the path.
+	- added `p` parameter to launch python interpreter.
+- activated git LFS for the `.xlsx` files.
+- updated readme to indicate the ETL process in the `view.xlsx` file (done at the very beginning of the project).
+	- updated queryem to be independent of file path.
+- cleaned up the `.xlsx` file.
+- fixed typo in previous commit for future changelogs.
+- modified everything to embed python.
+	- added python distribution folder to app folder.
+	- updated `.gitignore` to ignore every python distribution.
+	- updated bat files (buy, sell, ship, spy) to work with embedded python.
+- updated json indentation inside chauchera.
+- updated copy function in `build.py` to:
+	 - ignore comments.
+	 - ignore empty lines.
+- added pydist to build folder.
+- added python distribution path to `src.txt`. 
+- readme updated to celebrate new release.
+
+---
+
 # Build tools out of the box, 2/2! Keep moving from now on and go in peace.
 
 `build date: 2022-09-12 00:48:01`
