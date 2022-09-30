@@ -36,7 +36,7 @@ def stealable(wallet_url: str) -> bool:
                               "unit": 'USDT/USD',
                          }]
                     }
-                    json.dump(pocket_template, wallet)
+                    json.dump(pocket_template, wallet, indent=2)
                     wallet.close()
                     del pocket_template, wallet
           else:
@@ -55,7 +55,7 @@ def sacar_berrys(wallet_url: str) -> dict:
 def guardar_berrys(pocket: str, wallet_url: str) -> None:
      ("Guarda los datos en la billetera.")
      with open(wallet_url, 'w') as wallet:
-          json.dump(pocket, wallet)
+          json.dump(pocket, wallet, indent=2)
      del pocket, wallet
      return None
 

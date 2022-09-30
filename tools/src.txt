@@ -1,3 +1,4 @@
+# app's source files
 app\action\0select.bat
 app\action\buy.bat
 app\action\sell.bat
@@ -8,7 +9,46 @@ app\going_merry\franky.py
 app\going_merry\luffy.py
 app\going_merry\nami.py
 app\going_merry\usopp.py
+
+# Project build information b-daman file
 tools\bdmn.txt
+
+# Project files
 changelog.md
 license
 README.md
+
+# Python embedded distribution
+app\pydist\libcrypto-1_1.dll
+app\pydist\libffi-7.dll
+app\pydist\libssl-1_1.dll
+app\pydist\LICENSE.txt
+app\pydist\pyexpat.pyd
+app\pydist\python.cat
+app\pydist\python.exe
+app\pydist\python3.dll
+app\pydist\python310.dll
+app\pydist\python310.zip
+app\pydist\pythonw.exe
+app\pydist\select.pyd
+app\pydist\sqlite3.dll
+app\pydist\unicodedata.pyd
+app\pydist\vcruntime140.dll
+app\pydist\vcruntime140_1.dll
+app\pydist\winsound.pyd
+app\pydist\_asyncio.pyd
+app\pydist\_bz2.pyd
+app\pydist\_ctypes.pyd
+app\pydist\_decimal.pyd
+app\pydist\_elementtree.pyd
+app\pydist\_hashlib.pyd
+app\pydist\_lzma.pyd
+app\pydist\_msi.pyd
+app\pydist\_multiprocessing.pyd
+app\pydist\_overlapped.pyd
+app\pydist\_queue.pyd
+app\pydist\_socket.pyd
+app\pydist\_sqlite3.pyd
+app\pydist\_ssl.pyd
+app\pydist\_uuid.pyd
+app\pydist\_zoneinfo.pyd

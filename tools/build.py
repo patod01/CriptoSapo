@@ -223,6 +223,8 @@ def copy_sources() -> bool:
 
      with open('tools/_src.txt', 'w') as xcopy:
           for file in source_files:
+               if file == '\n': continue
+               if file[0] == '#': continue
                file = file[:-1:]
                destination = file.split('\\')
                destination.pop()

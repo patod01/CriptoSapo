@@ -5,5 +5,5 @@ temp
 build
 chauchero
 _*
-tools/pydist/*
+*/pydist/*
 criptosapo*
