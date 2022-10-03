@@ -10,17 +10,16 @@ permitan desarrollar programas faciles y utiles, los cuales, en el
 futuro, me salvaran el pellejo.
 
 ### Requisitos para version 1:
-~- registrar una base de datos en vivo desde binance.~
-~- construir el mismo formato de grafico de velas usado en trading.~
-~- simular compra y venta en vivo de tokens con paridad al USDT.~
-- funcionalidad descrita en "Funcion" completada
-- interfaz grafica para
-	- capturar datos
-	- transformar / exportar datos
-	- simular compra
-	- simular venta
-~- grafico para completar proceso ETL (queryem)~
-~- standalone~
+- ~Registrar una base de datos en vivo desde binance.~
+- ~Construir el mismo formato de grafico de velas usado en trading.~
+- ~Simular compra y venta en vivo de tokens con paridad al USDT.~
+- Interfaz grafica para
+	- Capturar datos;
+	- Transformar / exportar datos;
+	- Simular compra;
+	- Simular venta.
+- ~Grafico para completar proceso ETL (queryem).~
+- ~Standalone.~
 
 ---
 
