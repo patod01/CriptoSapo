@@ -1,0 +1,51 @@
+body {
+	display: grid;
+	justify-items: center;
+	background-color: rgba(0, 255, 0, 0.33);
+
+	user-select: none;
+
+	font-family: monospace;
+}
+
+h1 {
+	color: rgba(0, 121, 0, 1.0);
+	text-decoration: underline;
+}
+
+.contenedor {
+	display: grid;
+	grid-template-columns: auto auto;
+	gap: 13px 19px;
+
+	max-width: 666px;
+	padding: 10px;
+}
+
+.button {
+	border-style: ridge;
+	border-width: 10px;
+	border-color: rgba(0, 121, 0, 1.0);
+	background-color: greenyellow;
+	min-width: 69px;
+	padding: 15px 20px;
+
+	text-align: center;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.button:hover {
+	background-color: rgba(0, 169, 0, 1.0);
+}
+
+.button:active {
+	animation: whileClick 0.3s forwards;
+}
+
+@keyframes whileClick {
+	to {
+		background-color: rgba(0, 0, 0, 1.0);
+		color: rgba(169, 169, 100, 1.0);
+	}
+}
