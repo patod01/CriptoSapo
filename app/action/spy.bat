@@ -9,3 +9,4 @@ call %pydist% ..\going_merry\luffy.py spy
 
 echo - server turned OFF -
 pause>nul
+exit
