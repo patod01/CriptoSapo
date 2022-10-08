@@ -8,20 +8,28 @@ body {
 	font-family: monospace;
 }
 
+:root {--icon-witdh: 33px;}
+
 .title {
 	color: rgba(0, 121, 0, 1.0);
 	font-size: 27px;
 	text-decoration: underline;
+	font-weight: bold;
+	transition: all 0.1s linear;
 }
 
-.icon {
-	min-width: 40px;
-	transform: scale(1.5);
+.title:hover {
+	text-shadow: 0 0 2px black;
+	font-size: 33px;
 }
 
-.sapo {
-	display: grid;
-	grid-template-columns: auto 80% auto;
+.icon {min-width: var(--icon-witdh);}
+
+table {max-width: 666px;}
+
+td {
+	text-align: center;
+	min-width: calc(var(--icon-witdh) + 13px);
 }
 
 .contenedor {
@@ -44,19 +52,19 @@ body {
 	text-align: center;
 	font-size: 15px;
 	font-weight: bold;
+	transition: all 0.2s linear;
 }
 
 .button:hover {
 	background-color: rgba(0, 169, 0, 1.0);
+	padding: 17px 23px;
+	font-size: 19px;
+	font-weight: bold;
+	box-shadow: 0px 0px 10px 3px black;
 }
 
 .button:active {
-	animation: whileClick 0.3s forwards;
-}
-
-@keyframes whileClick {
-	to {
-		background-color: rgba(0, 0, 0, 1.0);
-		color: rgba(169, 169, 100, 1.0);
-	}
+	transition: none;
+	background-color: rgba(0, 0, 0, 1.0);
+	color: rgba(169, 169, 100, 1.0);
 }
