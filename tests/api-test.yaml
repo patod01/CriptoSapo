@@ -1,0 +1,187 @@
+_type: export
+__export_format: 4
+__export_date: 2022-10-09T16:26:22.305Z
+__export_source: insomnia.desktop.app:v2022.6.0
+resources:
+  - _id: req_85bd24b9af3447f7ae8f303ef40f120f
+    parentId: wrk_0d6e4cf782d34a9fbc1399cb752b36f0
+    modified: 1665273844346
+    created: 1664162972958
+    url: 127.0.0.1:7777
+    name: server-on
+    description: <b>a</b>a
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1664162972958
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: wrk_0d6e4cf782d34a9fbc1399cb752b36f0
+    parentId: null
+    modified: 1664159933736
+    created: 1664159933736
+    name: criptosapo
+    description: ""
+    scope: design
+    _type: workspace
+  - _id: req_5c7973a27bdc43a3ab8a943cde95e1fc
+    parentId: wrk_0d6e4cf782d34a9fbc1399cb752b36f0
+    modified: 1665275746448
+    created: 1665274000991
+    url: 127.0.0.1:7777/wallet/
+    name: wallet-content
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1664162972908
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_7ca4beb4f8a040029672183bd5738ca1
+    parentId: wrk_0d6e4cf782d34a9fbc1399cb752b36f0
+    modified: 1665320420333
+    created: 1665275764047
+    url: 127.0.0.1:7777/wallet/
+    name: wallet-buy
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"action": "buy"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1664162972858
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_5b8217e107694d448ed3d8e1824dcb62
+    parentId: wrk_0d6e4cf782d34a9fbc1399cb752b36f0
+    modified: 1665331221110
+    created: 1665275907537
+    url: 127.0.0.1:7777/wallet/
+    name: wallet-sell
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"action": "sell"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1664162972808
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_04d214e4ed9d656bff689352b743d0ecc5f11f59
+    parentId: wrk_0d6e4cf782d34a9fbc1399cb752b36f0
+    modified: 1664159933806
+    created: 1664159933806
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1664159933806
+    _type: environment
+  - _id: jar_04d214e4ed9d656bff689352b743d0ecc5f11f59
+    parentId: wrk_0d6e4cf782d34a9fbc1399cb752b36f0
+    modified: 1664159933812
+    created: 1664159933812
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_64e6abd68c0a4b3888e24f2ac586def3
+    parentId: wrk_0d6e4cf782d34a9fbc1399cb752b36f0
+    modified: 1664159933773
+    created: 1664159933773
+    fileName: criptosapo
+    contents: ""
+    contentType: yaml
+    _type: api_spec
+  - _id: uts_3aaab4ce0a3842a0860925568f039bac
+    parentId: wrk_0d6e4cf782d34a9fbc1399cb752b36f0
+    modified: 1665278707729
+    created: 1665278707729
+    name: wallet
+    _type: unit_test_suite
+  - _id: ut_3f2db59723c548efbc39cc5f048df38a
+    parentId: uts_3aaab4ce0a3842a0860925568f039bac
+    modified: 1665320387038
+    created: 1665278722974
+    requestId: req_5c7973a27bdc43a3ab8a943cde95e1fc
+    name: exist wallet
+    code: |-
+      const response1 = await insomnia.send();
+      expect(response1.status).to.equal(200);
+      expect(JSON.parse(response1.data)).to.have.property("coin");
+      expect(JSON.parse(response1.data)).to.have.property("historial");
+    _type: unit_test
+  - _id: ut_6e69746b2336432596bf92b565d106be
+    parentId: uts_3aaab4ce0a3842a0860925568f039bac
+    modified: 1665320518064
+    created: 1665320275372
+    requestId: req_85bd24b9af3447f7ae8f303ef40f120f
+    name: server is on
+    code: |-
+      const response1 = await insomnia.send();
+      expect(response1.status).to.equal(200);
+    _type: unit_test
+  - _id: ut_ac422ad74b5e4e85b1a32a8f4dfb0181
+    parentId: uts_3aaab4ce0a3842a0860925568f039bac
+    modified: 1665320497670
+    created: 1665320365274
+    requestId: req_7ca4beb4f8a040029672183bd5738ca1
+    name: can buy
+    code: |-
+      const response1 = await insomnia.send();
+      expect(response1.status).to.equal(200);
+      expect(JSON.parse(response1.data)).to.have.property("USDT");
+    _type: unit_test
+  - _id: ut_eb0818817dfb4f588dc4361418f6586a
+    parentId: uts_3aaab4ce0a3842a0860925568f039bac
+    modified: 1665320500624
+    created: 1665320369015
+    requestId: req_5b8217e107694d448ed3d8e1824dcb62
+    name: can sell
+    code: |-
+      const response1 = await insomnia.send();
+      expect(response1.status).to.equal(200);
+      expect(JSON.parse(response1.data)).to.have.property("USDT");
+    _type: unit_test
