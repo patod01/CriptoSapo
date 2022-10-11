@@ -4,7 +4,11 @@ from flask import (
      url_for, redirect, jsonify
 )
 
-app = Flask(__name__, template_folder='treasures')
+app = Flask(
+     __name__,
+     static_folder='treasures',
+     template_folder='treasures'
+)
 
 
 @app.errorhandler(404)
@@ -43,10 +47,13 @@ def api():
                     os.system('start buy')
                elif request.json['action'] == 'sell':
                     os.system('start sell')
-               # elif request.json['action'] == 'ship':
-               #      os.system('start ship')
-               # elif request.json['action'] == 'spy':
-               #      os.system('start spy')
+               elif request.json['action'] == 'ship':
+                    os.system('start ship')
+               elif request.json['action'] == 'spy':
+                    os.system('start spy')
+               # elif request.json['action'] == 'del':
+               else:
+                    return jsonify('Not implemented.')
                my_pocket = sanji().get('coin', 'No existe la chauchera!!')
      elif request.method == 'GET':
           my_pocket = sanji()
@@ -58,6 +65,6 @@ def api():
 
 
 if __name__ == '__main__':
-     app.run(debug=True, port=7777, host='0.0.0.0')
+     app.run(debug=True, port=7777, host='localhost')
 
 #ned
