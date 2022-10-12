@@ -1,3 +1,44 @@
+# The third and final / first version!!!
+
+`build date: 2022-10-11 22:56:07`
+`build version: 1.m4A1`
+
+- added front page.
+	- added 4 buttons.
+	- styled the whole page.
+	- added icon.
+	- added javascript file for making wires.
+- readme typos fixed.
+- added application launcher, `app.bat`.
+- Robin has joined the chat.
+	- Robin is the main server.
+	- added API url, 'wallet', for listening to all CRUD actions.
+	- added GET action to display the wallet's content.
+- modified all `.bat` files to exit at the end of file.
+- updated look and feel of home page.
+- added css classes to show unavailable buttons.
+- made API response actions for 'buy' and 'sell' buttons.
+- say hello to Sanji, the Robin's dog!
+	- sets the current directory to 'action'.
+	- returns the wallet's content.
+- made API test calls.
+	- added Insomnia API test json and yaml files.
+- deleted yaml file.
+- added 'delete wallet' button.
+- updated links to static files (css, js, png...).
+- added backend functions for 'ship' and 'spy' buttons.
+- created API calls in frontend except for 'del' button.
+- api unit tests updated.
+- clicker added.
+- updated readme with promises.
+- added to the build instructions
+	- server Robin;
+	- app launcher;
+	- server dependencies;
+	- server resources.
+
+---
+
 # Standalone is here!!
 
 `build date: 2022-09-30 17:10:57`
